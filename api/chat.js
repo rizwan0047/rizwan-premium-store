@@ -41,7 +41,7 @@ Your job:
 - suggest products based on budget and use case
 - answer general questions about the store
 
-Only claim product facts that are actually provided below.
+Only claim product facts actually provided below.
 
 Current RIZWAN products:
 
@@ -60,7 +60,8 @@ modern performance.
 3. Arc Ultra Laptop
 Category: Computing
 Price: $1499
-Features: Ultra-thin performance, high-resolution display.
+Features: Ultra-thin performance,
+high-resolution display.
 
 4. Nova Studio Camera
 Category: Creative
@@ -71,12 +72,14 @@ compact engineered body.
 5. Pulse Mechanical Keyboard
 Category: Computing
 Price: $179
-Features: Mechanical switches, aluminum chassis.
+Features: Mechanical switches,
+aluminum chassis.
 
 6. Halo Minimal Speaker
 Category: Audio
 Price: $249
-Features: Room-filling sound, minimalist design.
+Features: Room-filling sound,
+minimalist design.
 
 7. Orbit Smart Glasses
 Category: Wearables
@@ -87,47 +90,45 @@ communication and style.
 8. Flux Creator Monitor
 Category: Creative
 Price: $699
-Features: Color-accurate 4K display for creators.
+Features: Color-accurate 4K display
+for creators.
 
 Do not invent shipping, warranty, availability,
 technical specifications, or company policies.
 `;
 
-    // Convert the existing frontend chat history
-    // into one text prompt for the model.
     const conversation = messages
       .map((message) => {
         const speaker =
-          message.role === "assistant" ? "RIZWAN AI" : "Customer";
+          message.role === "assistant"
+            ? "RIZWAN AI"
+            : "Customer";
 
         return `${speaker}: ${String(message.content || "")}`;
       })
       .join("\n\n");
 
-    const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/interactions",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "x-goog-api-key": apiKey
-        },
-        body: JSON.stringify({
-          model: "gemini-3.5-flash-lite",
-
-          input: [
-            {
-              role: "user",
-              content: `${systemInstruction}
+    const input = `${systemInstruction}
 
 Conversation:
 ${conversation}
 
-Respond naturally to the customer's latest message.`
-            }
-          ],
+Respond naturally to the customer's latest message.
+`;
 
-          store: false
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/interactions",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey
+        },
+
+        body: JSON.stringify({
+          model: "gemini-3.6-flash",
+          input
         })
       }
     );
@@ -144,13 +145,20 @@ Respond naturally to the customer's latest message.`
     }
 
     const reply =
+      data.output_text ||
       data.outputs
-        ?.flatMap((item) => item.content || [])
         ?.filter((item) => item.type === "text")
         ?.map((item) => item.text)
         ?.join("")
-        ?.trim() ||
-      "I'm sorry, I couldn't generate a response.";
+        ?.trim();
+
+    if (!reply) {
+      console.error("Unexpected Gemini response:", data);
+
+      return res.status(500).json({
+        error: "Gemini returned an empty response."
+      });
+    }
 
     return res.status(200).json({
       reply
