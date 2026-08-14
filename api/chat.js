@@ -114,7 +114,6 @@ technical specifications, or company policies.
           }
         ]
       },
-
       ...messages.map((message) => ({
         role: message.role === "assistant" ? "model" : "user",
         parts: [
@@ -145,8 +144,9 @@ technical specifications, or company policies.
       console.error("Gemini error:", data);
 
       return res.status(500).json({
-  error: "The AI service is temporarily unavailable."
-});
+        error: "The Gemini service is temporarily unavailable."
+      });
+    }
 
     const reply =
       data.candidates?.[0]?.content?.parts
@@ -165,7 +165,6 @@ technical specifications, or company policies.
     return res.status(200).json({
       reply
     });
-
   } catch (error) {
     console.error("Chat API error:", error);
 
