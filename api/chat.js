@@ -14,17 +14,13 @@ export default async function handler(req, res) {
       });
     }
 
-    const apiKey =
-      process.env.OPENAI_API_KEY;
+    const apiKey = process.env.OPENAI_API_KEY;
 
     if (!apiKey) {
-  return res.status(500).json({
-    error: "OPENAI_API_KEY is not configured.",
-    availableKeys: Object.keys(process.env).filter(
-      (key) => !key.toLowerCase().includes("secret")
-    )
-  });
-}
+      return res.status(500).json({
+        error: "OPENAI_API_KEY is not configured."
+      });
+    }
 
     const response = await fetch(
       "https://api.openai.com/v1/responses",
@@ -37,7 +33,7 @@ export default async function handler(req, res) {
         },
 
         body: JSON.stringify({
-          model: "gpt-5.4-mini",
+          model: "gpt-5-mini",
 
           instructions: `
 You are RIZWAN AI, the premium shopping concierge
@@ -126,7 +122,7 @@ or company policies.
             content: [
               {
                 type: "input_text",
-                text: message.content
+                text: String(message.content || "")
               }
             ]
           }))
@@ -134,22 +130,24 @@ or company policies.
       }
     );
 
+    const data = await response.json();
+
     if (!response.ok) {
-  const errorText = await response.text();
+      console.error("OpenAI error:", data);
 
-  console.error("OpenAI error:", errorText);
-
-  return res.status(response.status).json({
-    error: "OpenAI request failed.",
-    details: errorText
-  });
-}
-
-    const data =
-      await response.json();
+      return res.status(500).json({
+        error: "The AI service returned an error."
+      });
+    }
 
     const reply =
-      data.output_text ||
+      data.output
+        ?.filter((item) => item.type === "message")
+        ?.flatMap((item) => item.content || [])
+        ?.filter((content) => content.type === "output_text")
+        ?.map((content) => content.text)
+        ?.join("\n")
+        ?.trim() ||
       "I'm sorry, I couldn't generate a response.";
 
     return res.status(200).json({
@@ -157,10 +155,7 @@ or company policies.
     });
 
   } catch (error) {
-    console.error(
-      "Chat API error:",
-      error
-    );
+    console.error("Chat API error:", error);
 
     return res.status(500).json({
       error: "Server error."
