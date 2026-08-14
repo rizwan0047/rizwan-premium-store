@@ -97,38 +97,44 @@ Do not invent shipping, warranty, availability,
 technical specifications, or company policies.
 `;
 
-    const conversation = messages
-      .map((message) => {
-        const speaker =
-          message.role === "assistant"
-            ? "RIZWAN AI"
-            : "Customer";
+    const contents = [
+      {
+        role: "user",
+        parts: [
+          {
+            text: systemInstruction
+          }
+        ]
+      },
+      {
+        role: "model",
+        parts: [
+          {
+            text: "Understood. I will act as RIZWAN AI and only use the provided store information."
+          }
+        ]
+      },
 
-        return `${speaker}: ${String(message.content || "")}`;
-      })
-      .join("\n\n");
-
-    const input = `${systemInstruction}
-
-Conversation:
-${conversation}
-
-Respond naturally to the customer's latest message.
-`;
+      ...messages.map((message) => ({
+        role: message.role === "assistant" ? "model" : "user",
+        parts: [
+          {
+            text: String(message.content || "")
+          }
+        ]
+      }))
+    ];
 
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/interactions",
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent",
       {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
           "x-goog-api-key": apiKey
         },
-
         body: JSON.stringify({
-          model: "gemini-3.6-flash",
-          input
+          contents
         })
       }
     );
@@ -145,12 +151,10 @@ Respond naturally to the customer's latest message.
     }
 
     const reply =
-      data.output_text ||
-      data.outputs
-        ?.filter((item) => item.type === "text")
-        ?.map((item) => item.text)
-        ?.join("")
-        ?.trim();
+      data.candidates?.[0]?.content?.parts
+        ?.map((part) => part.text || "")
+        .join("")
+        .trim();
 
     if (!reply) {
       console.error("Unexpected Gemini response:", data);
