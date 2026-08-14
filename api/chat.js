@@ -18,11 +18,13 @@ export default async function handler(req, res) {
       process.env.OPENAI_API_KEY;
 
     if (!apiKey) {
-      return res.status(500).json({
-        error:
-          "OPENAI_API_KEY is not configured."
-      });
-    }
+  return res.status(500).json({
+    error: "OPENAI_API_KEY is not configured.",
+    availableKeys: Object.keys(process.env).filter(
+      (key) => !key.toLowerCase().includes("secret")
+    )
+  });
+}
 
     const response = await fetch(
       "https://api.openai.com/v1/responses",
