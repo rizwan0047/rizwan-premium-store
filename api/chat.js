@@ -144,11 +144,9 @@ technical specifications, or company policies.
     if (!response.ok) {
       console.error("Gemini error:", data);
 
-      return res.status(response.status).json({
-        error: "Gemini request failed.",
-        details: data
-      });
-    }
+      return res.status(500).json({
+  error: "The AI service is temporarily unavailable."
+});
 
     const reply =
       data.candidates?.[0]?.content?.parts
