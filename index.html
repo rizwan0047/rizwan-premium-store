@@ -1,0 +1,1173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
+
+  <meta
+    name="description"
+    content="RIZWAN — premium technology, beautifully engineered."
+  />
+
+  <meta
+    name="theme-color"
+    content="#d9ff3f"
+  />
+
+  <title>RIZWAN — Premium Technology</title>
+
+  <!-- ========================================================
+       GOOGLE FONTS
+       ======================================================== -->
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- ========================================================
+       STYLESHEET
+       ======================================================== -->
+
+  <link
+    rel="stylesheet" href="./Css/style.css"
+  />
+</head>
+
+<body>
+
+  <!-- ========================================================
+       SCROLL PROGRESS
+       ======================================================== -->
+
+  <div
+    id="scroll-progress"
+    aria-hidden="true"
+  ></div>
+
+  <!-- ========================================================
+       CURSOR GLOW
+       ======================================================== -->
+
+  <div
+    id="cursor-glow"
+    aria-hidden="true"
+  ></div>
+
+  <!-- ========================================================
+       SITE HEADER
+       ======================================================== -->
+
+  <header class="site-header">
+    <div class="container site-header__inner">
+
+      <!-- Logo -->
+      <a
+        href="#top"
+        class="logo"
+        aria-label="RIZWAN home"
+      >
+        RIZWAN<span>.</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav
+        class="site-nav"
+        aria-label="Main navigation"
+      >
+        <a href="#shop">Shop</a>
+        <a href="#featured">Featured</a>
+        <a href="#story">Our Story</a>
+        <a href="#journal">Journal</a>
+      </nav>
+
+      <!-- Search -->
+      <div class="header-search">
+
+        <span
+          class="header-search__icon"
+          aria-hidden="true"
+        >
+          ⌕
+        </span>
+
+        <input
+          id="search-input"
+          type="search"
+          placeholder="Search products..."
+          autocomplete="off"
+          aria-label="Search products"
+        />
+
+      </div>
+
+      <!-- Header Actions -->
+      <div class="header-actions">
+
+        <!-- Theme -->
+        <button
+          id="theme-toggle"
+          class="icon-button theme-btn"
+          type="button"
+          aria-label="Switch theme"
+        >
+          <span id="theme-icon">☾</span>
+        </button>
+
+        <!-- Cart -->
+        <button
+          id="cart-button"
+          class="cart-button"
+          type="button"
+          aria-label="Open shopping cart"
+        >
+          Cart
+
+          <span
+            id="cart-count"
+            class="cart-button__count"
+          >
+            0
+          </span>
+        </button>
+
+        <!-- Mobile menu -->
+        <button
+          id="menu-toggle"
+          class="menu-toggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ========================================================
+       MOBILE MENU
+       ======================================================== -->
+
+  <div
+    id="mobile-menu"
+    class="mobile-menu"
+  >
+
+    <a
+      href="#shop"
+      data-mobile-link
+    >
+      Shop
+    </a>
+
+    <a
+      href="#featured"
+      data-mobile-link
+    >
+      Featured
+    </a>
+
+    <a
+      href="#story"
+      data-mobile-link
+    >
+      Our Story
+    </a>
+
+    <a
+      href="#journal"
+      data-mobile-link
+    >
+      Journal
+    </a>
+
+  </div>
+
+  <!-- ========================================================
+       MAIN CONTENT
+       ======================================================== -->
+
+  <main id="top">
+
+    <!-- ======================================================
+         HERO
+         ====================================================== -->
+
+    <section class="hero">
+
+      <div class="container hero__grid">
+
+        <!-- Hero Copy -->
+        <div
+          class="hero__content"
+          data-reveal
+        >
+
+          <div class="eyebrow hero__eyebrow">
+            Technology, reimagined
+          </div>
+
+          <h1 class="hero__title">
+
+            The future
+            <br />
+
+            <em>looks</em>
+            better.
+
+          </h1>
+
+          <p class="hero__description">
+            Discover beautifully engineered technology designed
+            for people who care about performance, detail and
+            the experience of owning something exceptional.
+          </p>
+
+          <div class="hero__actions">
+
+            <a
+              href="#shop"
+              class="button button--primary"
+            >
+              Explore collection
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a
+              href="#story"
+              class="button button--ghost"
+            >
+              Why RIZWAN
+            </a>
+
+          </div>
+
+        </div>
+
+        <!-- Hero Visual -->
+        <div
+          class="hero__visual"
+          data-reveal="right"
+        >
+
+          <div
+            class="hero__product"
+            data-tilt
+          >
+
+            <img
+              src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=1200"
+              alt="Premium wireless headphones"
+            />
+
+          </div>
+
+          <div class="hero__floating-card">
+
+            <strong>
+              Aether X1
+            </strong>
+
+            <span>
+              Spatial audio · Adaptive ANC
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================
+         MARQUEE
+         ====================================================== -->
+
+    <section
+      class="marquee"
+      aria-label="RIZWAN features"
+    >
+
+      <div class="marquee__track">
+
+        <div class="marquee__item">
+          Designed for tomorrow
+
+          <span
+            class="marquee__dot"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+        <div class="marquee__item">
+          Exceptional by design
+
+          <span
+            class="marquee__dot"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+        <div class="marquee__item">
+          Technology with intention
+
+          <span
+            class="marquee__dot"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+        <div class="marquee__item">
+          Built for people who care
+
+          <span
+            class="marquee__dot"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+        <!-- Duplicate for seamless animation -->
+        <div class="marquee__item">
+          Designed for tomorrow
+
+          <span
+            class="marquee__dot"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+        <div class="marquee__item">
+          Exceptional by design
+
+          <span
+            class="marquee__dot"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+        <div class="marquee__item">
+          Technology with intention
+
+          <span
+            class="marquee__dot"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+        <div class="marquee__item">
+          Built for people who care
+
+          <span
+            class="marquee__dot"
+            aria-hidden="true"
+          ></span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================
+         SHOP
+         ====================================================== -->
+
+    <section
+      id="shop"
+      class="section"
+    >
+
+      <div class="container">
+
+        <!-- Shop Header -->
+        <div
+          class="collection-header"
+          data-reveal
+        >
+
+          <div class="collection-header__copy">
+
+            <div class="eyebrow">
+              The collection
+            </div>
+
+            <h2 class="section-title">
+              Objects
+              <span>
+                worth owning.
+              </span>
+            </h2>
+
+            <p class="collection-header__description">
+              Curated hardware for modern work, creativity,
+              entertainment and everyday life. Every product
+              is selected for the same reason: it makes the
+              experience better.
+            </p>
+
+          </div>
+
+          <!-- Filters -->
+          <div
+            class="collection-filters"
+            aria-label="Product categories"
+          >
+
+            <button
+              class="filter-button is-active"
+              type="button"
+              data-filter="all"
+            >
+              All
+            </button>
+
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="audio"
+            >
+              Audio
+            </button>
+
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="wearables"
+            >
+              Wearables
+            </button>
+
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="computing"
+            >
+              Computing
+            </button>
+
+            <button
+              class="filter-button"
+              type="button"
+              data-filter="creative"
+            >
+              Creative
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- Product Grid -->
+        <div
+          id="product-grid"
+          class="product-grid"
+        >
+
+          <!-- Products are rendered by app.js -->
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================
+         FEATURED SECTION
+         ====================================================== -->
+
+    <section
+      id="featured"
+      class="section"
+    >
+
+      <div class="container">
+
+        <div
+          class="feature-split"
+          data-reveal
+        >
+
+          <!-- Image -->
+          <div class="feature-split__visual">
+
+            <img
+              src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?w=1400"
+              alt="Premium laptop on a workspace"
+              loading="lazy"
+            />
+
+          </div>
+
+          <!-- Copy -->
+          <div class="feature-split__content">
+
+            <div class="eyebrow">
+              The RIZWAN standard
+            </div>
+
+            <h2>
+              Less noise.
+              <br />
+              More <span class="text-accent">signal.</span>
+            </h2>
+
+            <p>
+              We believe the best technology doesn't demand
+              attention. It earns it. Every product in the
+              RIZWAN collection is chosen for the balance
+              between raw capability and thoughtful design.
+            </p>
+
+            <div class="feature-split__meta">
+
+              <div class="feature-split__meta-item">
+                <strong>4K</strong>
+                <span>Visual clarity</span>
+              </div>
+
+              <div class="feature-split__meta-item">
+                <strong>24H</strong>
+                <span>Battery life</span>
+              </div>
+
+              <div class="feature-split__meta-item">
+                <strong>AI</strong>
+                <span>Built-in intelligence</span>
+              </div>
+
+            </div>
+
+            <a
+              href="#story"
+              class="button button--accent"
+            >
+              Discover the philosophy
+              <span aria-hidden="true">↗</span>
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================
+         STORY
+         ====================================================== -->
+
+    <section
+      id="story"
+      class="section"
+    >
+
+      <div class="container">
+
+        <div class="story">
+
+          <!-- Sticky Intro -->
+          <div
+            class="story__sticky"
+            data-reveal="left"
+          >
+
+            <div class="story__number">
+              01 — Philosophy
+            </div>
+
+            <h2 class="story__title">
+              Technology
+              should feel
+              <em>human.</em>
+            </h2>
+
+            <p class="story__intro">
+              RIZWAN was created around a simple idea:
+              premium technology is not about having more.
+              It's about having exactly what matters.
+            </p>
+
+          </div>
+
+          <!-- Story Content -->
+          <div class="story__content">
+
+            <article
+              class="story-item"
+              data-reveal
+            >
+
+              <div class="story-item__index">
+                01 — Select
+              </div>
+
+              <h3>
+                We obsess over the details.
+              </h3>
+
+              <p>
+                Materials, interfaces, sound, battery life,
+                proportions and the tiny moments between
+                interactions all matter. We look beyond the
+                specification sheet and ask what it feels like
+                to actually live with the product.
+              </p>
+
+            </article>
+
+            <article
+              class="story-item"
+              data-reveal
+            >
+
+              <div class="story-item__index">
+                02 — Curate
+              </div>
+
+              <h3>
+                Fewer products. Better choices.
+              </h3>
+
+              <p>
+                Endless choice isn't the same thing as freedom.
+                Our collection is intentionally edited so that
+                discovering something great feels easy rather
+                than overwhelming.
+              </p>
+
+            </article>
+
+            <article
+              class="story-item"
+              data-reveal
+            >
+
+              <div class="story-item__index">
+                03 — Experience
+              </div>
+
+              <h3>
+                The product is only the beginning.
+              </h3>
+
+              <p>
+                From the first click to the unboxing moment and
+                years of daily use, we believe the entire
+                experience should feel considered, intuitive
+                and memorable.
+              </p>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================
+         JOURNAL
+         ====================================================== -->
+
+    <section
+      id="journal"
+      class="section"
+    >
+
+      <div class="container">
+
+        <div data-reveal>
+
+          <div class="eyebrow">
+            The journal
+          </div>
+
+          <h2 class="section-title">
+            Ideas for a
+            <span>
+              more intentional
+              digital life.
+            </span>
+          </h2>
+
+        </div>
+
+        <div class="journal-grid">
+
+          <!-- Journal Card -->
+          <article
+            class="journal-card"
+            data-reveal
+          >
+
+            <div class="journal-card__image">
+
+              <img
+                src="https://images.unsplash.com/photo-1499951360447-b19be8fe80f5?w=1000"
+                alt="Modern workspace"
+                loading="lazy"
+              />
+
+            </div>
+
+            <div class="journal-card__content">
+
+              <div class="journal-card__tag">
+                Workspace
+              </div>
+
+              <h3>
+                Why fewer devices can make you more productive.
+              </h3>
+
+              <p>
+                The modern desk doesn't need to be crowded
+                to be powerful.
+              </p>
+
+              <a
+                href="#"
+                class="journal-card__link"
+              >
+                Read article
+                <span aria-hidden="true">→</span>
+              </a>
+
+            </div>
+
+          </article>
+
+          <!-- Journal Card -->
+          <article
+            class="journal-card"
+            data-reveal
+          >
+
+            <div class="journal-card__image">
+
+              <img
+                src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1000"
+                alt="Technology and creative work"
+                loading="lazy"
+              />
+
+            </div>
+
+            <div class="journal-card__content">
+
+              <div class="journal-card__tag">
+                Creativity
+              </div>
+
+              <h3>
+                The tools that disappear when they're doing their job.
+              </h3>
+
+              <p>
+                Great technology should help you enter
+                the flow rather than interrupt it.
+              </p>
+
+              <a
+                href="#"
+                class="journal-card__link"
+              >
+                Read article
+                <span aria-hidden="true">→</span>
+              </a>
+
+            </div>
+
+          </article>
+
+          <!-- Journal Card -->
+          <article
+            class="journal-card"
+            data-reveal
+          >
+
+            <div class="journal-card__image">
+
+              <img
+                src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=1000"
+                alt="Modern smartphone"
+                loading="lazy"
+              />
+
+            </div>
+
+            <div class="journal-card__content">
+
+              <div class="journal-card__tag">
+                Culture
+              </div>
+
+              <h3>
+                What makes technology feel premium?
+              </h3>
+
+              <p>
+                It's rarely about the most expensive
+                component in the box.
+              </p>
+
+              <a
+                href="#"
+                class="journal-card__link"
+              >
+                Read article
+                <span aria-hidden="true">→</span>
+              </a>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- ======================================================
+         NEWSLETTER
+         ====================================================== -->
+
+    <section class="section">
+
+      <div class="container">
+
+        <div
+          class="newsletter"
+          data-reveal
+        >
+
+          <div class="newsletter__content">
+
+            <div>
+
+              <div class="eyebrow">
+                Stay in the loop
+              </div>
+
+              <h2 class="newsletter__title">
+                Good technology.
+                <br />
+                No spam.
+              </h2>
+
+              <p class="newsletter__description">
+                New products, useful ideas and carefully
+                selected stories. Delivered occasionally,
+                never annoyingly.
+              </p>
+
+            </div>
+
+            <form
+              id="newsletter-form"
+              class="newsletter-form"
+            >
+
+              <input
+                id="newsletter-input"
+                type="email"
+                placeholder="Your email address"
+                autocomplete="email"
+                aria-label="Email address"
+              />
+
+              <button type="submit">
+                Subscribe
+              </button>
+
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       CART OVERLAY
+       ======================================================== -->
+
+  <div
+    id="cart-overlay"
+    class="cart-overlay"
+    aria-hidden="true"
+  ></div>
+
+  <!-- ========================================================
+       CART DRAWER
+       ======================================================== -->
+
+  <aside
+    id="cart-drawer"
+    class="cart-drawer"
+    aria-label="Shopping cart"
+    aria-hidden="true"
+  >
+
+    <!-- Cart Header -->
+    <div class="cart-drawer__header">
+
+      <h2>
+        Your cart
+      </h2>
+
+      <button
+        id="cart-close"
+        class="cart-drawer__close"
+        type="button"
+        aria-label="Close shopping cart"
+      >
+        ×
+      </button>
+
+    </div>
+
+    <!-- Cart Items -->
+    <div
+      id="cart-items"
+      class="cart-drawer__items"
+    >
+
+      <!-- Cart rendered by JavaScript -->
+
+    </div>
+
+    <!-- Cart Footer -->
+    <div class="cart-drawer__footer">
+
+      <div class="cart-drawer__summary">
+
+        <span>
+          Subtotal
+        </span>
+
+        <span id="cart-subtotal">
+          $0.00
+        </span>
+
+      </div>
+
+      <button
+        id="cart-checkout"
+        class="button button--primary cart-checkout"
+        type="button"
+        disabled
+      >
+        Checkout
+        <span aria-hidden="true">→</span>
+      </button>
+
+    </div>
+
+  </aside>
+
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+
+  <footer class="site-footer">
+
+    <div class="container">
+
+      <div class="site-footer__top">
+
+        <!-- Brand -->
+        <div class="footer-brand">
+
+          <a
+            href="#top"
+            class="footer-brand__logo"
+          >
+            RIZWAN<span class="text-accent">.</span>
+          </a>
+
+          <p class="footer-brand__description">
+            Premium technology for people who care about
+            what they buy, how it works and how it feels.
+          </p>
+
+          <div class="social-links">
+
+            <a
+              href="#"
+              class="social-link"
+              aria-label="Instagram"
+            >
+              IG
+            </a>
+
+            <a
+              href="#"
+              class="social-link"
+              aria-label="X"
+            >
+              X
+            </a>
+
+            <a
+              href="#"
+              class="social-link"
+              aria-label="LinkedIn"
+            >
+              IN
+            </a>
+
+          </div>
+
+        </div>
+
+        <!-- Shop -->
+        <div class="footer-column">
+
+          <h4>
+            Shop
+          </h4>
+
+          <a href="#shop">
+            All products
+          </a>
+
+          <a href="#shop">
+            Audio
+          </a>
+
+          <a href="#shop">
+            Wearables
+          </a>
+
+          <a href="#shop">
+            Computing
+          </a>
+
+          <a href="#shop">
+            Creative
+          </a>
+
+        </div>
+
+        <!-- Company -->
+        <div class="footer-column">
+
+          <h4>
+            Company
+          </h4>
+
+          <a href="#story">
+            About RIZWAN
+          </a>
+
+          <a href="#story">
+            Philosophy
+          </a>
+
+          <a href="#journal">
+            Journal
+          </a>
+
+          <a href="#">
+            Careers
+          </a>
+
+          <a href="#">
+            Contact
+          </a>
+
+        </div>
+
+        <!-- Support -->
+        <div class="footer-column">
+
+          <h4>
+            Support
+          </h4>
+
+          <a href="#">
+            Shipping
+          </a>
+
+          <a href="#">
+            Returns
+          </a>
+
+          <a href="#">
+            Warranty
+          </a>
+
+          <a href="#">
+            FAQ
+          </a>
+
+          <a href="#">
+            Privacy
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="site-footer__bottom">
+
+        <span>
+          ©
+          <span id="current-year">
+            2026
+          </span>
+          RIZWAN. All rights reserved.
+        </span>
+
+        <div class="site-footer__bottom-links">
+
+          <a href="#">
+            Terms
+          </a>
+
+          <a href="#">
+            Privacy
+          </a>
+
+          <a href="#">
+            Cookies
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+  <!-- ========================================================
+       JAVASCRIPT
+       ======================================================== -->
+
+  <script
+    src="./Js/app.js"
+  ></script>
+
+</body>
+</html>
