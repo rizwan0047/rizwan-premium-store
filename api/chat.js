@@ -135,19 +135,15 @@ or company policies.
     );
 
     if (!response.ok) {
-      const errorText =
-        await response.text();
+  const errorText = await response.text();
 
-      console.error(
-        "OpenAI error:",
-        errorText
-      );
+  console.error("OpenAI error:", errorText);
 
-      return res.status(500).json({
-        error:
-          "The AI service returned an error."
-      });
-    }
+  return res.status(response.status).json({
+    error: "OpenAI request failed.",
+    details: errorText
+  });
+}
 
     const data =
       await response.json();
