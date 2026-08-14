@@ -965,4 +965,205 @@ document.addEventListener("DOMContentLoaded", () => {
 
   renderProducts();
   renderCart();
+  /* ==========================================================
+   RIZWAN AI CHAT
+   ========================================================== */
+
+const aiChatTrigger = document.querySelector("#ai-chat-trigger");
+const aiChat = document.querySelector("#ai-chat");
+const aiChatClose = document.querySelector("#ai-chat-close");
+const aiChatForm = document.querySelector("#ai-chat-form");
+const aiChatInput = document.querySelector("#ai-chat-input");
+const aiChatMessages = document.querySelector("#ai-chat-messages");
+const aiSuggestions = document.querySelectorAll(
+  "[data-ai-suggestion]"
+);
+
+const aiConversation = [];
+
+function openAIChat() {
+  if (!aiChat) return;
+
+  aiChat.classList.add("is-open");
+  aiChat.setAttribute("aria-hidden", "false");
+
+  setTimeout(() => {
+    aiChatInput?.focus();
+  }, 250);
+}
+
+function closeAIChat() {
+  if (!aiChat) return;
+
+  aiChat.classList.remove("is-open");
+  aiChat.setAttribute("aria-hidden", "true");
+}
+
+function scrollAIChat() {
+  if (!aiChatMessages) return;
+
+  aiChatMessages.scrollTop =
+    aiChatMessages.scrollHeight;
+}
+
+function addAIMessage(role, text) {
+  if (!aiChatMessages) return;
+
+  const message = document.createElement("div");
+
+  message.className =
+    role === "user"
+      ? "ai-message ai-message--user"
+      : "ai-message ai-message--assistant";
+
+  if (role === "assistant") {
+    message.innerHTML = `
+      <div class="ai-message__avatar">✦</div>
+      <div class="ai-message__bubble"></div>
+    `;
+
+    message.querySelector(
+      ".ai-message__bubble"
+    ).textContent = text;
+  } else {
+    message.innerHTML = `
+      <div class="ai-message__bubble"></div>
+    `;
+
+    message.querySelector(
+      ".ai-message__bubble"
+    ).textContent = text;
+  }
+
+  aiChatMessages.appendChild(message);
+
+  scrollAIChat();
+}
+
+function addAITyping() {
+  if (!aiChatMessages) return null;
+
+  const typing = document.createElement("div");
+
+  typing.className =
+    "ai-message ai-message--assistant";
+
+  typing.innerHTML = `
+    <div class="ai-message__avatar">✦</div>
+
+    <div class="ai-message__bubble">
+      <span class="ai-chat__typing">
+        <span></span>
+        <span></span>
+        <span></span>
+      </span>
+    </div>
+  `;
+
+  aiChatMessages.appendChild(typing);
+
+  scrollAIChat();
+
+  return typing;
+}
+
+async function sendAIMessage(text) {
+  const cleanedText = text.trim();
+
+  if (!cleanedText) return;
+
+  addAIMessage("user", cleanedText);
+
+  aiConversation.push({
+    role: "user",
+    content: cleanedText
+  });
+
+  if (aiChatInput) {
+    aiChatInput.value = "";
+  }
+
+  const typingMessage = addAITyping();
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+
+      headers: {
+        "Content-Type": "application/json"
+      },
+
+      body: JSON.stringify({
+        messages: aiConversation
+      })
+    });
+
+    const data = await response.json();
+
+    typingMessage?.remove();
+
+    if (!response.ok) {
+      throw new Error(
+        data.error || "Something went wrong."
+      );
+    }
+
+    const reply =
+      data.reply ||
+      "I'm sorry, I couldn't generate a response.";
+
+    aiConversation.push({
+      role: "assistant",
+      content: reply
+    });
+
+    addAIMessage("assistant", reply);
+
+  } catch (error) {
+    console.error("RIZWAN AI:", error);
+
+    typingMessage?.remove();
+
+    addAIMessage(
+      "assistant",
+      "I'm having trouble connecting right now. Please try again in a moment."
+    );
+  }
+}
+
+if (aiChatTrigger) {
+  aiChatTrigger.addEventListener(
+    "click",
+    openAIChat
+  );
+}
+
+if (aiChatClose) {
+  aiChatClose.addEventListener(
+    "click",
+    closeAIChat
+  );
+}
+
+if (aiChatForm) {
+  aiChatForm.addEventListener(
+    "submit",
+    async (event) => {
+      event.preventDefault();
+
+      await sendAIMessage(
+        aiChatInput?.value || ""
+      );
+    }
+  );
+}
+
+aiSuggestions.forEach((button) => {
+  button.addEventListener("click", () => {
+    const message =
+      button.dataset.aiSuggestion || "";
+
+    sendAIMessage(message);
+  });
+});
 });

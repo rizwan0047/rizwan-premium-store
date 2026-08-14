@@ -1164,7 +1164,109 @@
   <!-- ========================================================
        JAVASCRIPT
        ======================================================== -->
+<!-- ========================================================
+     RIZWAN AI CHAT
+     ======================================================== -->
 
+<button
+  id="ai-chat-trigger"
+  class="ai-chat-trigger"
+  type="button"
+  aria-label="Open RIZWAN AI"
+>
+  <span class="ai-chat-trigger__spark">✦</span>
+  <span>RIZWAN AI</span>
+</button>
+
+<section
+  id="ai-chat"
+  class="ai-chat"
+  aria-label="RIZWAN AI assistant"
+  aria-hidden="true"
+>
+  <div class="ai-chat__header">
+
+    <div>
+      <div class="ai-chat__label">
+        RIZWAN
+      </div>
+
+      <h2>
+        AI Concierge
+      </h2>
+
+      <p>
+        Your personal technology guide.
+      </p>
+    </div>
+
+    <button
+      id="ai-chat-close"
+      class="ai-chat__close"
+      type="button"
+      aria-label="Close RIZWAN AI"
+    >
+      ×
+    </button>
+
+  </div>
+
+  <div
+    id="ai-chat-messages"
+    class="ai-chat__messages"
+  >
+
+    <div class="ai-message ai-message--assistant">
+      <div class="ai-message__avatar">✦</div>
+
+      <div class="ai-message__bubble">
+        Hi. I'm RIZWAN AI.
+
+        Tell me what you're looking for and I'll help
+        you find the right technology.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="ai-chat__suggestions">
+
+    <button type="button" data-ai-suggestion="Recommend headphones for me">
+      Headphones
+    </button>
+
+    <button type="button" data-ai-suggestion="Help me build a workspace">
+      Build my setup
+    </button>
+
+    <button type="button" data-ai-suggestion="Compare your products">
+      Compare
+    </button>
+
+  </div>
+
+  <form
+    id="ai-chat-form"
+    class="ai-chat__form"
+  >
+
+    <input
+      id="ai-chat-input"
+      type="text"
+      placeholder="Ask RIZWAN AI..."
+      autocomplete="off"
+      aria-label="Message RIZWAN AI"
+    />
+
+    <button
+      type="submit"
+      aria-label="Send message"
+    >
+      →
+    </button>
+
+  </form>
+</section>
   <script
     src="./Js/app.js"
   ></script>
