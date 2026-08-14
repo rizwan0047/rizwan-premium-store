@@ -1167,3 +1167,153 @@ aiSuggestions.forEach((button) => {
   });
 });
 });
+// ========================================================
+// RIZWAN AI CHAT
+// ========================================================
+
+const aiChatTrigger = document.getElementById("ai-chat-trigger");
+const aiChat = document.getElementById("ai-chat");
+const aiChatClose = document.getElementById("ai-chat-close");
+const aiChatForm = document.getElementById("ai-chat-form");
+const aiChatInput = document.getElementById("ai-chat-input");
+const aiChatMessages = document.getElementById("ai-chat-messages");
+
+const aiConversation = [];
+
+function openAIChat() {
+  aiChat.classList.add("is-open");
+  aiChat.setAttribute("aria-hidden", "false");
+  aiChatInput.focus();
+}
+
+function closeAIChat() {
+  aiChat.classList.remove("is-open");
+  aiChat.setAttribute("aria-hidden", "true");
+}
+
+function addAIMessage(content, role) {
+  const message = document.createElement("div");
+
+  message.className =
+    role === "assistant"
+      ? "ai-message ai-message--assistant"
+      : "ai-message ai-message--user";
+
+  message.innerHTML = `
+    <div class="ai-message__avatar">
+      ${role === "assistant" ? "✦" : "You"}
+    </div>
+
+    <div class="ai-message__bubble"></div>
+  `;
+
+  message
+    .querySelector(".ai-message__bubble")
+    .textContent = content;
+
+  aiChatMessages.appendChild(message);
+  aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+}
+
+async function sendAIMessage(message) {
+  aiConversation.push({
+    role: "user",
+    content: message
+  });
+
+  addAIMessage(message, "user");
+
+  const loadingMessage = document.createElement("div");
+
+  loadingMessage.className =
+    "ai-message ai-message--assistant";
+
+  loadingMessage.innerHTML = `
+    <div class="ai-message__avatar">✦</div>
+    <div class="ai-message__bubble">Thinking...</div>
+  `;
+
+  aiChatMessages.appendChild(loadingMessage);
+  aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+
+  try {
+    const response = await fetch("/api/chat", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        messages: aiConversation
+      })
+    });
+
+    const data = await response.json();
+
+    loadingMessage.remove();
+
+    if (!response.ok) {
+      throw new Error(
+        data.error || "The AI service returned an error."
+      );
+    }
+
+    const reply =
+      data.reply ||
+      "I'm sorry, I couldn't generate a response.";
+
+    aiConversation.push({
+      role: "assistant",
+      content: reply
+    });
+
+    addAIMessage(reply, "assistant");
+
+  } catch (error) {
+    console.error("RIZWAN AI error:", error);
+
+    loadingMessage.remove();
+
+    addAIMessage(
+      "I'm sorry, I'm having trouble connecting right now. Please try again.",
+      "assistant"
+    );
+  }
+}
+
+if (aiChatTrigger) {
+  aiChatTrigger.addEventListener("click", openAIChat);
+}
+
+if (aiChatClose) {
+  aiChatClose.addEventListener("click", closeAIChat);
+}
+
+if (aiChatForm) {
+  aiChatForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+
+    const message = aiChatInput.value.trim();
+
+    if (!message) {
+      return;
+    }
+
+    aiChatInput.value = "";
+    await sendAIMessage(message);
+  });
+}
+
+document
+  .querySelectorAll("[data-ai-suggestion]")
+  .forEach((button) => {
+    button.addEventListener("click", async () => {
+      const message = button.dataset.aiSuggestion;
+
+      if (!message) {
+        return;
+      }
+
+      openAIChat();
+      await sendAIMessage(message);
+    });
+  });

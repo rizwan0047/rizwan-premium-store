@@ -3969,3 +3969,32 @@ p {
     border-radius: 26px;
   }
 }
+.ai-chat-trigger {
+  position: fixed !important;
+  right: 20px !important;
+  bottom: 20px !important;
+  z-index: 99999 !important;
+
+  display: flex !important;
+  align-items: center;
+  gap: 8px;
+
+  padding: 14px 20px;
+  border: 0;
+  border-radius: 999px;
+
+  background: #111;
+  color: #fff;
+
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+
+  cursor: pointer;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.ai-chat-trigger__spark {
+  display: inline-block !important;
+}
