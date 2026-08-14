@@ -14,28 +14,15 @@ export default async function handler(req, res) {
       });
     }
 
-    const apiKey = process.env.OPENAI_API_KEY;
+    const apiKey = process.env.GEMINI_API_KEY;
 
     if (!apiKey) {
       return res.status(500).json({
-        error: "OPENAI_API_KEY is not configured."
+        error: "GEMINI_API_KEY is not configured."
       });
     }
 
-    const response = await fetch(
-      "https://api.openai.com/v1/responses",
-      {
-        method: "POST",
-
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`
-        },
-
-        body: JSON.stringify({
-          model: "gpt-5-mini",
-
-          instructions: `
+    const systemInstruction = `
 You are RIZWAN AI, the premium shopping concierge
 for the RIZWAN technology store.
 
@@ -75,8 +62,7 @@ modern performance.
 3. Arc Ultra Laptop
 Category: Computing
 Price: $1499
-Features: Ultra-thin performance,
-high-resolution display.
+Features: Ultra-thin performance, high-resolution display.
 
 4. Nova Studio Camera
 Category: Creative
@@ -87,14 +73,12 @@ compact engineered body.
 5. Pulse Mechanical Keyboard
 Category: Computing
 Price: $179
-Features: Mechanical switches,
-aluminum chassis.
+Features: Mechanical switches, aluminum chassis.
 
 6. Halo Minimal Speaker
 Category: Audio
 Price: $249
-Features: Room-filling sound,
-minimalist design.
+Features: Room-filling sound, minimalist design.
 
 7. Orbit Smart Glasses
 Category: Wearables
@@ -105,27 +89,41 @@ communication and style.
 8. Flux Creator Monitor
 Category: Creative
 Price: $699
-Features: Color-accurate 4K display
-for creators.
+Features: Color-accurate 4K display for creators.
 
-Do not invent shipping, warranty,
-availability, technical specifications,
-or company policies.
-`,
+Do not invent shipping, warranty, availability,
+technical specifications, or company policies.
+`;
 
-          input: messages.map((message) => ({
-            role:
-              message.role === "assistant"
-                ? "assistant"
-                : "user",
+    const contents = messages.map((message) => ({
+      role: message.role === "assistant" ? "model" : "user",
+      parts: [
+        {
+          text: String(message.content || "")
+        }
+      ]
+    }));
 
-            content: [
+    const response = await fetch(
+      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      {
+        method: "POST",
+
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey
+        },
+
+        body: JSON.stringify({
+          systemInstruction: {
+            parts: [
               {
-                type: "input_text",
-                text: String(message.content || "")
+                text: systemInstruction
               }
             ]
-          }))
+          },
+
+          contents
         })
       }
     );
@@ -133,23 +131,27 @@ or company policies.
     const data = await response.json();
 
     if (!response.ok) {
-  console.error("OpenAI error:", data);
+      console.error("Gemini error:", data);
 
-  return res.status(response.status).json({
-    error: "OpenAI request failed.",
-    details: data
-  });
-}
+      return res.status(response.status).json({
+        error: "Gemini request failed.",
+        details: data
+      });
+    }
 
     const reply =
-      data.output
-        ?.filter((item) => item.type === "message")
-        ?.flatMap((item) => item.content || [])
-        ?.filter((content) => content.type === "output_text")
-        ?.map((content) => content.text)
-        ?.join("\n")
-        ?.trim() ||
-      "I'm sorry, I couldn't generate a response.";
+      data.candidates?.[0]?.content?.parts
+        ?.map((part) => part.text || "")
+        .join("")
+        .trim();
+
+    if (!reply) {
+      console.error("Unexpected Gemini response:", data);
+
+      return res.status(500).json({
+        error: "Gemini returned an empty response."
+      });
+    }
 
     return res.status(200).json({
       reply
