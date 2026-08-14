@@ -41,9 +41,7 @@ Your job:
 - suggest products based on budget and use case
 - answer general questions about the store
 
-Important:
-Only claim product facts that are actually provided
-by the store context.
+Only claim product facts that are actually provided below.
 
 Current RIZWAN products:
 
@@ -95,35 +93,41 @@ Do not invent shipping, warranty, availability,
 technical specifications, or company policies.
 `;
 
-    const contents = messages.map((message) => ({
-      role: message.role === "assistant" ? "model" : "user",
-      parts: [
-        {
-          text: String(message.content || "")
-        }
-      ]
-    }));
+    // Convert the existing frontend chat history
+    // into one text prompt for the model.
+    const conversation = messages
+      .map((message) => {
+        const speaker =
+          message.role === "assistant" ? "RIZWAN AI" : "Customer";
+
+        return `${speaker}: ${String(message.content || "")}`;
+      })
+      .join("\n\n");
 
     const response = await fetch(
-      "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent",
+      "https://generativelanguage.googleapis.com/v1beta/interactions",
       {
         method: "POST",
-
         headers: {
           "Content-Type": "application/json",
           "x-goog-api-key": apiKey
         },
-
         body: JSON.stringify({
-          systemInstruction: {
-            parts: [
-              {
-                text: systemInstruction
-              }
-            ]
-          },
+          model: "gemini-3.5-flash-lite",
 
-          contents
+          input: [
+            {
+              role: "user",
+              content: `${systemInstruction}
+
+Conversation:
+${conversation}
+
+Respond naturally to the customer's latest message.`
+            }
+          ],
+
+          store: false
         })
       }
     );
@@ -140,18 +144,13 @@ technical specifications, or company policies.
     }
 
     const reply =
-      data.candidates?.[0]?.content?.parts
-        ?.map((part) => part.text || "")
-        .join("")
-        .trim();
-
-    if (!reply) {
-      console.error("Unexpected Gemini response:", data);
-
-      return res.status(500).json({
-        error: "Gemini returned an empty response."
-      });
-    }
+      data.outputs
+        ?.flatMap((item) => item.content || [])
+        ?.filter((item) => item.type === "text")
+        ?.map((item) => item.text)
+        ?.join("")
+        ?.trim() ||
+      "I'm sorry, I couldn't generate a response.";
 
     return res.status(200).json({
       reply
