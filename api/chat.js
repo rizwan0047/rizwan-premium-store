@@ -133,12 +133,13 @@ or company policies.
     const data = await response.json();
 
     if (!response.ok) {
-      console.error("OpenAI error:", data);
+  console.error("OpenAI error:", data);
 
-      return res.status(500).json({
-        error: "The AI service returned an error."
-      });
-    }
+  return res.status(response.status).json({
+    error: "OpenAI request failed.",
+    details: data
+  });
+}
 
     const reply =
       data.output
