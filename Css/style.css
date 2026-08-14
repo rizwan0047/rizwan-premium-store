@@ -1,11 +1,42 @@
 /* ============================================================
-   RIZWAN — PREMIUM TECH STORE
-   style.css
+   MOBILE / IOS / ANDROID FOUNDATION
    ============================================================ */
 
-/* ============================================================
-   1. DESIGN TOKENS
-   ============================================================ */
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  min-width: 320px;
+  overflow-x: hidden;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  -webkit-tap-highlight-color: transparent;
+}
+
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Prevent accidental horizontal scrolling */
+main,
+section,
+header,
+footer {
+  max-width: 100%;
+}
+
+/* Better image behavior on phones */
+img {
+  height: auto;
+  -webkit-user-drag: none;
+  user-select: none;
+}
 :root {
   --bg: #f4f3ee;
   --bg-soft: #ecebe5;
@@ -2810,5 +2841,699 @@ p {
     margin: 0;
 
     font-size: 0.6rem;
+  }
+}
+/* ============================================================
+   PREMIUM MOBILE EXPERIENCE
+   ANDROID + IOS
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  :root {
+    --header-height: 72px;
+  }
+
+  /* ----------------------------------------------------------
+     GLOBAL
+     ---------------------------------------------------------- */
+
+  body {
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .container {
+    width: min(
+      calc(100% - 28px),
+      var(--container)
+    );
+  }
+
+  .section {
+    padding: 72px 0;
+  }
+
+  /* ----------------------------------------------------------
+     HEADER
+     ---------------------------------------------------------- */
+
+  .site-header {
+    height: var(--header-height);
+
+    padding-top:
+      env(safe-area-inset-top);
+
+    background:
+      rgba(244, 243, 238, 0.88);
+  }
+
+  [data-theme="dark"] .site-header {
+    background:
+      rgba(9, 10, 8, 0.9);
+  }
+
+  .site-header__inner {
+    gap: 8px;
+  }
+
+  .logo {
+    font-size: 1.25rem;
+  }
+
+  .header-search {
+    display: none;
+  }
+
+  .site-nav {
+    display: none;
+  }
+
+  .header-actions {
+    margin-left: auto;
+  }
+
+  .icon-button,
+  .menu-toggle {
+    width: 44px;
+    height: 44px;
+  }
+
+  .cart-button {
+    min-width: 92px;
+    height: 44px;
+  }
+
+  /* ----------------------------------------------------------
+     MOBILE MENU
+     ---------------------------------------------------------- */
+
+  .mobile-menu {
+    top:
+      calc(
+        var(--header-height)
+        + env(safe-area-inset-top)
+      );
+
+    left: 12px;
+    right: 12px;
+
+    border-radius: 24px;
+  }
+
+  .mobile-menu a {
+    min-height: 48px;
+
+    display: flex;
+    align-items: center;
+
+    font-size: 1.05rem;
+  }
+
+  /* ----------------------------------------------------------
+     HERO
+     ---------------------------------------------------------- */
+
+  .hero {
+    min-height:
+      calc(
+        100svh
+        - var(--header-height)
+      );
+  }
+
+  .hero__grid {
+    display: flex;
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 45px;
+
+    padding:
+      55px 0
+      45px;
+  }
+
+  .hero__title {
+    font-size:
+      clamp(
+        3.5rem,
+        16vw,
+        5rem
+      );
+
+    line-height: 0.84;
+
+    max-width: 100%;
+  }
+
+  .hero__description {
+    max-width: 100%;
+
+    font-size: 0.95rem;
+
+    line-height: 1.7;
+  }
+
+  .hero__actions {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    width: 100%;
+  }
+
+  .hero__actions .button {
+    width: 100%;
+    min-height: 52px;
+  }
+
+  .hero__visual {
+    min-height: 390px;
+
+    width: 100%;
+  }
+
+  .hero__visual::before {
+    width: 290px;
+    height: 290px;
+  }
+
+  .hero__product {
+    width: min(
+      88vw,
+      390px
+    );
+
+    border-radius: 28px;
+
+    transform: rotate(2deg);
+  }
+
+  /* Disable desktop-like hover tilt behavior */
+  .hero__product:hover {
+    transform: rotate(2deg);
+  }
+
+  .hero__floating-card {
+    left: 5px;
+    bottom: 12px;
+
+    min-width: 175px;
+
+    padding: 14px 16px;
+
+    border-radius: 18px;
+  }
+
+  .hero__floating-card strong {
+    font-size: 1rem;
+  }
+
+  .hero__floating-card span {
+    font-size: 0.68rem;
+  }
+
+  /* ----------------------------------------------------------
+     MARQUEE
+     ---------------------------------------------------------- */
+
+  .marquee {
+    padding: 15px 0;
+  }
+
+  .marquee__item {
+    font-size: 0.82rem;
+
+    gap: 18px;
+
+    padding-right: 18px;
+  }
+
+  .marquee__dot {
+    width: 5px;
+    height: 5px;
+    flex-basis: 5px;
+  }
+
+  /* ----------------------------------------------------------
+     SECTION TITLES
+     ---------------------------------------------------------- */
+
+  .section-title {
+    max-width: 100%;
+
+    margin-bottom: 28px;
+
+    font-size:
+      clamp(
+        2.9rem,
+        14vw,
+        4.5rem
+      );
+
+    line-height: 0.9;
+  }
+
+  /* ----------------------------------------------------------
+     COLLECTION
+     ---------------------------------------------------------- */
+
+  .collection-header {
+    display: block;
+
+    margin-bottom: 30px;
+  }
+
+  .collection-header__description {
+    font-size: 0.92rem;
+
+    line-height: 1.7;
+  }
+
+  .collection-filters {
+    display: flex;
+
+    width: 100%;
+
+    margin-top: 26px;
+
+    overflow-x: auto;
+
+    flex-wrap: nowrap;
+
+    padding-bottom: 7px;
+
+    scrollbar-width: none;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .collection-filters::-webkit-scrollbar {
+    display: none;
+  }
+
+  .filter-button {
+    flex: 0 0 auto;
+
+    min-height: 42px;
+
+    padding: 0 16px;
+  }
+
+  /* ----------------------------------------------------------
+     PRODUCT GRID
+     ---------------------------------------------------------- */
+
+  .product-grid {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+  }
+
+  .product-card {
+    border-radius: 24px;
+  }
+
+  .product-card__image {
+    aspect-ratio: 1 / 0.9;
+  }
+
+  .product-card__content {
+    padding: 19px;
+  }
+
+  .product-card__title {
+    font-size: 1.15rem;
+  }
+
+  .product-card__description {
+    min-height: auto;
+
+    margin-bottom: 20px;
+
+    font-size: 0.8rem;
+  }
+
+  .product-card__bottom {
+    align-items: center;
+
+    gap: 10px;
+  }
+
+  .product-card__button {
+    min-height: 44px;
+
+    padding: 0 16px;
+  }
+
+  .wishlist-button {
+    width: 44px;
+    height: 44px;
+  }
+
+  /* ----------------------------------------------------------
+     FEATURED
+     ---------------------------------------------------------- */
+
+  .feature-split {
+    grid-template-columns: 1fr;
+
+    border-radius: 26px;
+  }
+
+  .feature-split__visual {
+    min-height: 320px;
+  }
+
+  .feature-split__content {
+    padding: 42px 22px;
+  }
+
+  .feature-split__content h2 {
+    font-size:
+      clamp(
+        2.9rem,
+        13vw,
+        4.5rem
+      );
+  }
+
+  .feature-split__content p {
+    font-size: 0.9rem;
+
+    line-height: 1.75;
+  }
+
+  .feature-split__meta {
+    grid-template-columns: 1fr;
+
+    gap: 8px;
+  }
+
+  /* ----------------------------------------------------------
+     STORY
+     ---------------------------------------------------------- */
+
+  .story {
+    grid-template-columns: 1fr;
+
+    gap: 55px;
+  }
+
+  .story__sticky {
+    position: static;
+  }
+
+  .story__title {
+    font-size:
+      clamp(
+        3rem,
+        14vw,
+        4.8rem
+      );
+  }
+
+  .story__intro {
+    font-size: 0.92rem;
+  }
+
+  .story__content {
+    gap: 45px;
+  }
+
+  .story-item {
+    padding-bottom: 40px;
+  }
+
+  .story-item h3 {
+    font-size: 1.55rem;
+  }
+
+  .story-item p {
+    font-size: 0.88rem;
+
+    line-height: 1.75;
+  }
+
+  /* ----------------------------------------------------------
+     JOURNAL
+     ---------------------------------------------------------- */
+
+  .journal-grid {
+    grid-template-columns: 1fr;
+
+    gap: 16px;
+  }
+
+  .journal-card {
+    border-radius: 24px;
+  }
+
+  .journal-card__content {
+    padding: 20px;
+  }
+
+  .journal-card h3 {
+    font-size: 1.2rem;
+  }
+
+  /* ----------------------------------------------------------
+     NEWSLETTER
+     ---------------------------------------------------------- */
+
+  .newsletter {
+    padding:
+      42px 20px;
+
+    border-radius: 25px;
+  }
+
+  .newsletter__content {
+    grid-template-columns: 1fr;
+
+    gap: 32px;
+  }
+
+  .newsletter__title {
+    font-size:
+      clamp(
+        2.9rem,
+        13vw,
+        4.5rem
+      );
+  }
+
+  .newsletter__description {
+    font-size: 0.88rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 7px;
+
+    padding: 8px;
+
+    border-radius: 20px;
+  }
+
+  .newsletter-form input {
+    width: 100%;
+
+    min-height: 48px;
+  }
+
+  .newsletter-form button {
+    width: 100%;
+
+    min-height: 48px;
+  }
+
+  /* ----------------------------------------------------------
+     FOOTER
+     ---------------------------------------------------------- */
+
+  .site-footer {
+    padding:
+      65px 0
+      calc(
+        25px +
+        env(safe-area-inset-bottom)
+      );
+  }
+
+  .site-footer__top {
+    grid-template-columns: 1fr;
+
+    gap: 36px;
+  }
+
+  .site-footer__bottom {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 15px;
+  }
+
+  .site-footer__bottom-links {
+    flex-wrap: wrap;
+
+    gap: 13px;
+  }
+
+  /* ----------------------------------------------------------
+     CART
+     ---------------------------------------------------------- */
+
+  .cart-drawer {
+    width: 100%;
+
+    height:
+      calc(
+        100svh
+      );
+
+    padding-top:
+      env(safe-area-inset-top);
+  }
+
+  .cart-drawer__header {
+    padding:
+      18px 18px;
+  }
+
+  .cart-drawer__items {
+    padding:
+      12px 18px;
+
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .cart-drawer__footer {
+    padding:
+      18px;
+
+    padding-bottom:
+      calc(
+        18px +
+        env(safe-area-inset-bottom)
+      );
+  }
+
+  .cart-checkout {
+    min-height: 54px;
+  }
+
+  .cart-item {
+    grid-template-columns:
+      72px
+      1fr;
+
+    gap: 12px;
+  }
+
+  .cart-item__image {
+    width: 72px;
+    height: 72px;
+
+    border-radius: 14px;
+  }
+
+  .cart-item__controls button {
+    width: 34px;
+    height: 34px;
+  }
+
+  /* ----------------------------------------------------------
+     BUTTONS / TOUCH
+     ---------------------------------------------------------- */
+
+  .button {
+    min-height: 48px;
+  }
+
+  /* Disable cursor-only effects on touch devices */
+  #cursor-glow {
+    display: none;
+  }
+
+  /* Stop browser from interpreting long taps as selections */
+  .product-card__image,
+  .hero__product img {
+    -webkit-user-select: none;
+    user-select: none;
+  }
+}
+
+/* ============================================================
+   EXTRA SMALL PHONES
+   ============================================================ */
+
+@media (max-width: 390px) {
+
+  .container {
+    width: calc(100% - 22px);
+  }
+
+  .hero__title {
+    font-size: 3.25rem;
+  }
+
+  .hero__visual {
+    min-height: 350px;
+  }
+
+  .hero__product {
+    width: 84vw;
+  }
+
+  .hero__floating-card {
+    min-width: 155px;
+
+    padding: 12px;
+  }
+
+  .hero__floating-card strong {
+    font-size: 0.9rem;
+  }
+
+  .hero__floating-card span {
+    font-size: 0.62rem;
+  }
+
+  .product-card__bottom {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .product-card__button {
+    width: 100%;
+  }
+}
+
+/* ============================================================
+   IPHONE SAFE AREA
+   ============================================================ */
+
+@supports (padding: env(safe-area-inset-bottom)) {
+
+  body {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .mobile-menu {
+    padding-bottom:
+      calc(
+        24px +
+        env(safe-area-inset-bottom)
+      );
   }
 }

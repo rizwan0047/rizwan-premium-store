@@ -365,11 +365,14 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     }
 
-    saveCart();
-    renderCart();
-    openCart();
+      saveCart();
+  renderCart();
 
-    animateCartButton();
+  if (window.innerWidth > 768) {
+    openCart();
+  }
+
+  animateCartButton();
   }
 
   function removeFromCart(productId) {
